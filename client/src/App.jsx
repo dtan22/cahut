@@ -1,9 +1,15 @@
-import Chat from './chat/index.jsx'
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Landing from "./pages/Landing";
+import Game from "./pages/Game"
 
-function App() {
-  return (
-    <Chat />
-  )
+export default function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="game" element={<Game />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
-
-export default App;
