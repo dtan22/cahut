@@ -1,0 +1,9 @@
+{
+    "SERVER_SEND_ID": "server-send-id",
+    "SERVER_SEND_CHAT_MESSAGE": "server-send-chat-message",
+    "SERVER_JOIN_RESPONSE": "server-join-response",
+    "CLIENT_HOST_JOIN": "client-host-start",
+    "CLIENT_PLAYER_JOIN": "client-player-join",
+    "CLIENT_GAME_START": "client-game-start",
+    "CLIENT_SEND_CHAT_MESSAGE": "client-send-chat-message"
+}
