@@ -1,6 +1,19 @@
 {
+  "name": "web",
+  "version": "1.0.0",
+  "description": "cahut web server",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "dtan22",
+  "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "socket.io": "^4.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }

@@ -1,3 +1,9 @@
+# Install packages
+
+```bash
+$ npm install
+```
+
 # Start server
 
 ```bash
