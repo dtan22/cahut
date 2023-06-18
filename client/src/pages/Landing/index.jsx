@@ -10,14 +10,15 @@ import "./styles.css"
 
 export default function Landing() {
     const [error, setError] = useState('')
-    const [text, setText] = useState('')
+    const [pinText, setPinText] = useState('')
+    const [nameText, setNameText] = useState('')
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     async function submitPin() {
         const data = {
-            pinNumber: text
+            pinNumber: pinText
         }
 
         const res = await postData('player-join', data)
@@ -33,11 +34,24 @@ export default function Landing() {
 
     return (
         <div className="landing">
-            <div className="pin-input">
+            <div className="title">
+                Cahut
+            </div>
+            <div className="text-input" >
+
                 <textarea
                     placeholder="Enter PIN..."
-                    value={text}
-                    onChange={e => setText(e.target.value)}
+                    value={pinText}
+                    onChange={e => setPinText(e.target.value)}
+                    autoFocus={true}
+                    maxLength={10}
+                />
+                <textarea
+                    placeholder="Enter Name..."
+                    value={nameText}
+                    onChange={e => setNameText(e.target.value)}
+                    autoFocus={false}
+                    maxLength={10}
                 />
             </div>
             <div className="error-message">
@@ -48,6 +62,10 @@ export default function Landing() {
                     onClick={submitPin}>
                     Join Room
                 </button>
+            </div>
+            <div className="login">
+                Want to create a game? &nbsp;
+                <a href={'/auth'}>Log in</a>;
             </div>
         </div>
     )

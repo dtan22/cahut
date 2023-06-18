@@ -6,6 +6,7 @@
     left: 0;
     right: 50%;
     background-color: black;
+    color: white
 }
 
 .question-box {
@@ -28,6 +29,7 @@
     left: 0;
     right: 50%;
     background-color: black;
+    color: white;
 }
 
 .answer-box {

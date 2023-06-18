@@ -3,17 +3,54 @@
     height: inherit;
 }
 
-.pin-input {
+.title {
+    width: 100%;
+    height: 10vh;
+    margin-top: 10vh;
+    font-size: 5em;
+    text-align: center;
+    color: white;
+}
+
+a {
+    color: bisque
+}
+
+.landing textarea {
+    font-size: 2rem;
+    box-sizing: border-box;
+    background: #ebf5ff;
+    border-radius: 2em;
+    resize: none;
+    white-space: normal;
+    text-align: justify;
+    -moz-text-align-last: center;
+    /* Firefox 12+ */
+    text-align-last: center;
+}
+
+.text-input {
     width: 40vw;
-    height: 5vh;
-    margin-left: 30vw;
-    margin-top: 40vh;
+    height: 30vh;
+    margin-left: 33.5vw;
+    margin-top: 10vh;
     display: flex;
+    flex-direction: column;
     align-content: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .submit-pin {
+    width: 100%;
+    height: 5em;
+    margin-top: 0vh;
+    display: flex;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+}
+
+.login {
     width: 100%;
     height: 5em;
     margin-top: 5vh;
@@ -21,13 +58,6 @@
     justify-content: center;
     top: 50%;
     left: 50%;
-}
-
-.waiting-text {
-    width: 100%;
-    height: 10vh;
-    font-size: large;
-    text-align: center;
 }
 
 .error-message {
