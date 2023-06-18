@@ -1,0 +1,130 @@
+.auth-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: space-evenly;
+    height: 100%;
+    margin-top: 5vh;
+    color: white;
+}
+
+.login-container {
+    width: 30vw;
+    margin: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: #243f34;
+    height: 70vh;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+}
+
+.login-form input {
+    margin-bottom: 10px;
+    width: 20vw;
+    height: 5vh;
+    font-size: 1.5rem;
+}
+
+.login-form button {
+    margin-top: 10px;
+    width: 10vw;
+}
+
+.login-form .error {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.login-form .success {
+    color: green;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.login-form .loading {
+    color: blue;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.login-form .login-link {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.login-form .login-link a {
+    color: blue;
+}
+
+.signup-container {
+    width: 30vw;
+    height: 70vh;
+    margin: 10vh;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #243f34;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+}
+
+.signup-form input {
+    margin-bottom: 10px;
+    width: 20vw;
+    height: 5vh;
+    font-size: 1.5rem;
+}
+
+.signup-form button {
+    margin-top: 10px;
+    width: 10vw;
+}
+
+.signup-form .error {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.signup-form .success {
+    color: green;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.signup-form .loading {
+    color: blue;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.signup-form .signup-link {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.signup-form .signup-link a {
+    color: blue;
+}
