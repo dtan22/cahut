@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define(
+    const User = sequelize.define(
         'user',
         {
             username: {
@@ -18,8 +18,9 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            // freezeTableName: true,
-            // timestamps: true,
+            freezeTableName: true,
+            timestamps: true,
         },
     );
+    return User;
 };

@@ -1,15 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define(
+    const Room = sequelize.define(
         'room',
         {
-            roomId: {
-                type: DataTypes.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-            },
             username: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                primaryKey: true,
             },
             roomName: {
                 type: DataTypes.STRING,
@@ -18,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
             pinNumber: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                primaryKey: true,
+            },
+            isOpen: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: true,
             },
             createdAt: {
                 type: DataTypes.DATE,
@@ -27,8 +29,9 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            // freezeTableName: true,
-            // timestamps: true,
+            freezeTableName: true,
+            timestamps: true,
         },
     );
+    return Room;
 };

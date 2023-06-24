@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define(
+    const Question = sequelize.define(
         'question',
         {
             questionId: {
@@ -15,8 +15,20 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            answer: {
-                type: new DataTypes.ARRAY(DataTypes.STRING),
+            answer1: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            answer2: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            answer3: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            answer4: {
+                type: DataTypes.STRING,
                 allowNull: false,
             },
             createdAt: {
@@ -27,8 +39,9 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            // freezeTableName: true,
-            // timestamps: true,
+            freezeTableName: true,
+            timestamps: true,
         },
     );
+    return Question;
 };

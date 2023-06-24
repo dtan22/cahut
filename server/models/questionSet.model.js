@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define(
+    const QuestionSet = sequelize.define(
         'questionSet',
         {
             questionSetId: {
@@ -23,8 +23,9 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            // freezeTableName: true,
-            // timestamps: true,
+            freezeTableName: true,
+            timestamps: true,
         },
     );
+    return QuestionSet
 };

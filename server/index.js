@@ -12,11 +12,6 @@ const messages = JSON.parse(fs.readFileSync("../constants/messages.json"))
 const app = express()
 const server = http.createServer(app)
 
-function validatePIN(pinNumber) {
-    // TODO: validate pin number
-    return pinNumber == "1234" || pinNumber == "4321"
-}
-
 const {
     SERVER_PORT,
     CLIENT_PORT,
@@ -26,6 +21,7 @@ const {
 app.use(cors())
 app.use(express.json())
 app.use(bodyparser.urlencoded({ extended: false }))
+
 
 const tempQuestions = [
     {
@@ -39,6 +35,11 @@ const tempQuestions = [
         answerIndex: 1
     }
 ]
+
+function validatePIN(pinNumber) {
+    // TODO: validate pin number
+    return pinNumber == "1234" || pinNumber == "4321"
+}
 
 function getQuestion(pinNumber, questionIndex) {
     // TODO: get question from database
@@ -104,7 +105,6 @@ socketIo.on("connection", (socket) => {
     })
 })
 
-
 server.listen(SERVER_PORT, () => {
     console.log(`Server running at http://localhost:${SERVER_PORT}/`)
 })
@@ -121,3 +121,5 @@ app.post('/player-join', (req, res) => {
         res.status(500).send({ success: false, message: error.message })
     }
 })
+
+app.use(require('./routes/user.route'));

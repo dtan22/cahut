@@ -47,4 +47,6 @@ db.room.belongsTo(db.user, {
     foreignKey: 'username',
 });
 
+sequelize.sync();
+
 module.exports = db;
