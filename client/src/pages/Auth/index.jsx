@@ -41,13 +41,13 @@ export default function Auth() {
         console.log(data)
 
         if (data.success) {
-            navigate('host')
+            navigate('/dashboard')
         } else {
             setLoginError(data.message)
         }
     }
 
-    const handleSignUpSubmit = (event) => {
+    const handleSignUpSubmit = async (event) => {
         event.preventDefault();
         if (inputs.signupUsername == null) {
             setSignupError('Username is required')
@@ -74,9 +74,9 @@ export default function Auth() {
             password: password
         }
 
-        const data = postData('signup', credentials)
+        const data = await postData('signup', credentials)
         if (data.success) {
-            navigate('host')
+            navigate('/dashboard')
         } else {
             setSignupError(data.message)
         }
