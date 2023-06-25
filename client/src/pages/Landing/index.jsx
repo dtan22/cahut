@@ -1,10 +1,8 @@
-import socketIOClient from "socket.io-client"
 import React, { useState, useEffect, useRef } from 'react'
-import messages from "../../../../constants/messages.json"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from 'react-redux'
-import { setId, setPinNumber } from '../../utils/slices/sessionSlice'
-import { getData, postData } from '../../utils/api'
+import { setPinNumber } from '../../utils/slices/sessionSlice'
+import { postData } from '../../utils/api'
 
 import "./styles.css"
 

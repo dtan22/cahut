@@ -4,6 +4,7 @@ import Landing from "./pages/Landing";
 import Game from "./pages/Game"
 import Auth from "./pages/Auth"
 import Dashboard from "./pages/Dashboard"
+import CreateQuestionSet from "./pages/CreateQuestionSet"
 
 export default function App() {
     return (
@@ -13,6 +14,7 @@ export default function App() {
                 <Route path="game" element={<Game />} />
                 <Route path="auth" element={<Auth />} />
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="questionset/create/:questionSetId" element={<CreateQuestionSet />} />
             </Routes>
         </BrowserRouter>
     );

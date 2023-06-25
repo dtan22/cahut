@@ -1,8 +1,10 @@
 import "./styles.css"
 
 import { useState } from 'react'
-import { getData, postData } from '../../utils/api'
+import { postData } from '../../utils/api'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setUsername } from '../../utils/slices/authSlice'
 
 export default function Auth() {
 
@@ -10,7 +12,14 @@ export default function Auth() {
     const [loginError, setLoginError] = useState('')
     const [signupError, setSignupError] = useState('')
 
+    const dispatch = useDispatch()
+
     const navigate = useNavigate()
+
+    function authSuccess() {
+        dispatch(setUsername(inputs.loginUsername))
+        navigate('/dashboard')
+    }
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -41,7 +50,7 @@ export default function Auth() {
         console.log(data)
 
         if (data.success) {
-            navigate('/dashboard')
+            authSuccess()
         } else {
             setLoginError(data.message)
         }
@@ -75,8 +84,11 @@ export default function Auth() {
         }
 
         const data = await postData('signup', credentials)
+        console.log(data)
         if (data.success) {
-            navigate('/dashboard')
+            setTimeout(() => {
+                authSuccess()
+            }, 1000)
         } else {
             setSignupError(data.message)
         }
