@@ -1,5 +1,4 @@
 const db = require('../db/index');
-const { sequelize } = require('../db/database');
 
 const User = db.user;
 
@@ -17,7 +16,7 @@ const login = async (req, res) => {
                 message: 'Login successful.',
             });
         } else {
-            res.status(401).send({
+            res.status(200).send({
                 success: false,
                 message: 'Wrong username or password.',
             });
@@ -32,13 +31,6 @@ const login = async (req, res) => {
 
 const signup = async (req, res) => {
     try {
-        if (!req.body.username || !req.body.password) {
-            res.status(200).send({
-                success: false,
-                message: 'Username and password cannot be empty.',
-            });
-            return;
-        }
         const existed = await User.findOne({
             where: {
                 username: req.body.username,

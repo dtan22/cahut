@@ -18,7 +18,6 @@ db.sequelize = sequelize;
 db.user = require('../models/user.model')(sequelize, DataTypes);
 db.questionSet = require('../models/questionSet.model')(sequelize, DataTypes);
 db.question = require('../models/question.model')(sequelize, DataTypes);
-db.room = require('../models/room.model')(sequelize, DataTypes);
 
 db.questionSet.hasMany(db.question, {
     foreignKey: 'questionSetId',
@@ -27,24 +26,6 @@ db.questionSet.hasMany(db.question, {
 
 db.question.belongsTo(db.questionSet, {
     foreignKey: 'questionSetId',
-});
-
-db.questionSet.hasMany(db.room, {
-    foreignKey: 'questionSetId',
-    onDelete: 'cascade',
-});
-
-db.room.belongsTo(db.questionSet, {
-    foreignKey: 'questionSetId',
-});
-
-db.user.hasMany(db.room, {
-    foreignKey: 'username',
-    onDelete: 'cascade',
-});
-
-db.room.belongsTo(db.user, {
-    foreignKey: 'username',
 });
 
 sequelize.sync();

@@ -3,15 +3,20 @@ module.exports = (sequelize, DataTypes) => {
         'questionSet',
         {
             questionSetId: {
-                type: DataTypes.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
+                allowNull: false,
+                primaryKey: true
             },
             username: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
             questionSetName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            state: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },

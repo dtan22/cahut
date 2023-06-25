@@ -2,14 +2,13 @@ module.exports = (sequelize, DataTypes) => {
     const Question = sequelize.define(
         'question',
         {
-            questionId: {
-                type: DataTypes.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-            },
             questionSetId: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
+                primaryKey: true,
+            },
+            questionNumber: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
             },
             question: {
                 type: DataTypes.STRING,
@@ -29,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
             },
             answer4: {
                 type: DataTypes.STRING,
+                allowNull: false,
+            },
+            correctAnswer: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             createdAt: {

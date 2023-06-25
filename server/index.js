@@ -36,6 +36,8 @@ const tempQuestions = [
     }
 ]
 
+const db = require('./db/index')
+
 function validatePIN(pinNumber) {
     // TODO: validate pin number
     return pinNumber == "1234" || pinNumber == "4321"
@@ -123,3 +125,5 @@ app.post('/player-join', (req, res) => {
 })
 
 app.use(require('./routes/user.route'));
+app.use(require('./routes/question.route'));
+app.use(require('./routes/questionSet.route'));
