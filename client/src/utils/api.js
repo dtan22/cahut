@@ -1,13 +1,12 @@
 const server = "http://localhost:3000/";
 
-async function getData(url, body) {
+async function getData(url) {
     const data = await fetch(server + url, {
         method: "GET",
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(body)
     })
     return data.json();
 }
