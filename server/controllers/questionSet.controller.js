@@ -1,18 +1,10 @@
 const db = require('../db/index');
-const { getQuestions } = require('./question.controller');
 
 const QuestionSet = db.questionSet;
 
 const createQuestionSet = async (req, res) => {
     try {
         const { username, questionSetName } = req.body;
-        if (!username || !questionSetName) {
-            res.status(200).send({
-                success: false,
-                message: 'Username and question set name cannot be empty.',
-            });
-            return;
-        }
         const existed = await QuestionSet.findOne({
             where: {
                 username: username,
@@ -88,8 +80,8 @@ const getQuestionSets = async (req, res) => {
 
 const updateQuestionSet = async (req, res) => {
     try {
-        const { username, questionSetId, questionSetName } = req.body;
-        if (!username || !questionSetId || !questionSetName) {
+        const { username, pinNumber, questionSetName } = req.body;
+        if (!username || !pinNumber || !questionSetName) {
             res.status(200).send({
                 success: false,
                 message: 'Username, question set id and question set name cannot be empty.',
@@ -101,7 +93,7 @@ const updateQuestionSet = async (req, res) => {
         }, {
             where: {
                 username: username,
-                questionSetId: questionSetId,
+                pinNumber: pinNumber,
             },
         });
         if (questionSet) {
@@ -125,11 +117,11 @@ const updateQuestionSet = async (req, res) => {
 
 const getQuestionSet = async (req, res) => {
     try {
-        const { username, questionSetId } = req.body;
+        const { username, pinNumber } = req.body;
         const questionSet = await QuestionSet.findOne({
             where: {
                 username: username,
-                questionSetId: questionSetId,
+                pinNumber: pinNumber,
             },
         });
         if (questionSet) {
@@ -152,11 +144,40 @@ const getQuestionSet = async (req, res) => {
     }
 }
 
-
+const updateQuestionSetState = async (req, res) => {
+    try {
+        const { username, pinNumber, state } = req.body;
+        const questionSet = await QuestionSet.update({
+            state: state,
+        }, {
+            where: {
+                username: username,
+                pinNumber: pinNumber,
+            },
+        });
+        if (questionSet) {
+            res.status(200).send({
+                success: true,
+                message: 'Question set state updated successfully.',
+            });
+        } else {
+            res.status(200).send({
+                success: false,
+                message: 'Question set state update failed.',
+            });
+        }
+    } catch (err) {
+        res.status(500).send({
+            success: false,
+            message: err.message || 'Some error occurred while updating the question set state.',
+        });
+    }
+}
 
 module.exports = {
     createQuestionSet,
     getQuestionSets,
     getQuestionSet,
     updateQuestionSet,
+    updateQuestionSetState,
 }

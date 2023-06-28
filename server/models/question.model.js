@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     const Question = sequelize.define(
         'question',
         {
-            questionSetId: {
+            pinNumber: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },

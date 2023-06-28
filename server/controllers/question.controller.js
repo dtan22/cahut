@@ -4,10 +4,10 @@ const Question = db.question;
 
 const createQuestion = async (req, res) => {
     try {
-        const { questionSetId, questionNumber, question, answer1, answer2, answer3, answer4, correctAnswer } = req.body;
+        const { pinNumber, questionNumber, question, answer1, answer2, answer3, answer4, correctAnswer } = req.body;
         const existed = await Question.findOne({
             where: {
-                questionSetId: questionSetId,
+                pinNumber: pinNumber,
                 questionNumber: questionNumber,
             },
         });
@@ -21,7 +21,7 @@ const createQuestion = async (req, res) => {
                 correctAnswer: correctAnswer,
             }, {
                 where: {
-                    questionSetId: questionSetId,
+                    pinNumber: pinNumber,
                     questionNumber: questionNumber,
                 },
             });
@@ -32,7 +32,7 @@ const createQuestion = async (req, res) => {
             return;
         }
         const questionSet = await Question.create({
-            questionSetId: questionSetId,
+            pinNumber: pinNumber,
             questionNumber: questionNumber,
             question: question,
             answer1: answer1,
@@ -62,10 +62,10 @@ const createQuestion = async (req, res) => {
 
 const getQuestions = async (req, res) => {
     try {
-        const { questionSetId } = req.body;
+        const { pinNumber } = req.body;
         const questions = await Question.findAll({
             where: {
-                questionSetId: questionSetId,
+                pinNumber: pinNumber,
             },
         });
         if (questions) {
@@ -90,10 +90,10 @@ const getQuestions = async (req, res) => {
 
 const getQuestion = async (req, res) => {
     try {
-        const { questionSetId, questionNumber } = req.body;
+        const { pinNumber, questionNumber } = req.body;
         const question = await Question.findOne({
             where: {
-                questionSetId: questionSetId,
+                pinNumber: pinNumber,
                 questionNumber: questionNumber,
             },
         });

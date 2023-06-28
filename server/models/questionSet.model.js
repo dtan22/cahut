@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     const QuestionSet = sequelize.define(
         'questionSet',
         {
-            questionSetId: {
+            pinNumber: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 allowNull: false,

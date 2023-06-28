@@ -22,7 +22,6 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyparser.urlencoded({ extended: false }))
 
-
 const tempQuestions = [
     {
         question: "What is the capital of India?",
@@ -36,16 +35,31 @@ const tempQuestions = [
     }
 ]
 
-const db = require('./db/index')
+const db = require("./db")
 
-function validatePIN(pinNumber) {
-    // TODO: validate pin number
-    return pinNumber == "1234" || pinNumber == "4321"
+async function validatePIN(pinNumber) {
+    const QuestionSet = db.questionSet
+    const questionSet = await QuestionSet.findOne({
+        where: {
+            pinNumber: pinNumber,
+            state: "open"
+        }
+    })
+    if (questionSet) {
+        return true
+    }
+    return false
 }
 
-function getQuestion(pinNumber, questionIndex) {
-    // TODO: get question from database
-    return tempQuestions[questionIndex]
+async function getQuestion(pinNumber, questioNumber) {
+    const Question = db.question
+    const question = await Question.findOne({
+        where: {
+            pinNumber: pinNumber,
+            questioNumber: questioNumber
+        }
+    })
+    return question
 }
 
 const socketIo = socketio(server, {
@@ -62,38 +76,34 @@ socketIo.on("connection", (socket) => {
     socket.on(messages.CLIENT_HOST_WAIT, (data) => {
         const { pinNumber } = data
         socket.join(pinNumber)
-        socket.join(pinNumber + "-host")
     })
 
-    socket.on(messages.CLIENT_HOST_NEXT_QUESTION, (data) => {
-        const { pinNumber, questionIndex } = data
-        const question = getQuestion(pinNumber, questionIndex)
-        socket.to(pinNumber).emit(messages.SERVER_QUESTION_START, { question, questionIndex })
+    socket.on(messages.CLIENT_HOST_NEXT_QUESTION, async (data) => {
+        const { pinNumber, questionNumber } = data
+        const question = await getQuestion(pinNumber, questionIndex)
+        socketIo.to(pinNumber).emit(messages.SERVER_QUESTION_START, { question, questionNumber })
         setTimeout(async () => {
-            const data = await getTurnStatistics(pinNumber, questionIndex)
-            socket.to(pinNumber).emit(messages.SERVER_QUESTION_END, data)
+            socketIo.to(pinNumber).emit(messages.SERVER_QUESTION_END)
         }, 10000)
     })
 
     socket.on(messages.CLIENT_HOST_END, (data) => {
         const { pinNumber } = data
-        socket.to(pinNumber).emit(messages.SERVER_GAME_END)
+        socketIo.to(pinNumber).emit(messages.SERVER_GAME_END)
     })
 
     socket.on(messages.CLIENT_PLAYER_JOIN, (data) => {
         const { pinNumber } = data
         if (validatePIN(pinNumber)) {
+            console.log("Player joined: " + socket.id)
             socket.join(pinNumber)
-            socket.emit(messages.SERVER_JOIN_RESPONSE, { success: true, message: "successful", pinNumber: pinNumber })
-        } else {
-            socket.emit(messages.SERVER_JOIN_RESPONSE, { success: false, message: "unsuccessful" })
         }
     })
 
     socket.on(messages.CLIENT_PLAYER_ANSWER, (data) => {
         const { pinNumber, questionIndex, answerIndex } = data
         const question = getQuestion(pinNumber, questionIndex)
-        socket.to(pinNumber).emit(messages.SERVER_PLAYER_ANSWER, { correct: answerIndex == question.answerIndex })
+        socketIo.to(pinNumber).emit(messages.SERVER_PLAYER_ANSWER_RESPONSE, { correct: answerIndex == question.answerIndex })
     })
 
     socket.on(messages.CLIENT_SEND_CHAT_MESSAGE, function (data) {
