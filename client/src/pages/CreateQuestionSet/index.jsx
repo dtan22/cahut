@@ -1,16 +1,12 @@
 import React from 'react';
 import './styles.css';
-import { getData, postData } from '../../utils/api';
+import { postData } from '../../utils/api';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 export default function CreateQuestionSet() {
     const navigate = useNavigate();
-    const auth = useSelector(state => state.auth);
-    const username = auth.username;
+    const username = sessionStorage.getItem('username');
     const { pinNumber } = useParams();
-
-    console.log(pinNumber)
 
     const [questionSetName, setQuestionSetName] = React.useState('untitled');
     const [currentQuestion, setCurrentQuestion] = React.useState(0);

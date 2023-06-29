@@ -1,23 +1,23 @@
 import React from 'react';
 import './styles.css';
-import { getData, postData } from '../../utils/api';
+import { postData } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 import QuestionSets from '../../components/QuestionSets';
 
 export default function Dashboard() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const auth = useSelector(state => state.auth);
-    const username = auth.username;
+    const username = sessionStorage.getItem('username');
+    const pinNumber = sessionStorage.getItem('pinNumber');
 
     const [questionSets, setQuestionSets] = React.useState([]);
-    const [rooms, setRooms] = React.useState([]);
 
     React.useEffect(() => {
         if (!username) {
             navigate('/auth');
+        }
+        if (pinNumber) {
+            navigate('/hosting');
         }
 
         async function getQuestionSets() {
@@ -33,6 +33,10 @@ export default function Dashboard() {
         <div>
             <h1>Dashboard</h1>
             <QuestionSets questionSets={questionSets} />
+            <button onClick={() => {
+                sessionStorage.removeItem('username');
+                navigate('/auth')
+            }}>Logout</button>
         </div>
     )
 }

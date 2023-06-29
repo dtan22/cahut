@@ -2,16 +2,13 @@ import React from 'react';
 import "./styles.css"
 import { postData } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { setPinNumber } from '../../utils/slices/sessionSlice';
 
 export default function QuestionSets({
     questionSets,
 }) {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const auth = useSelector(state => state.auth);
-    const username = auth.username;
+    const username = sessionStorage.getItem('username');
 
     React.useEffect(() => {
         if (!username) {
@@ -29,12 +26,24 @@ export default function QuestionSets({
             }
             const data = await postData('questionset/create', body);
             if (data.success) {
-                pinNumber = data.pinNumber;
+                pinNumber = data.data.pinNumber;
+                console.log(data.data.pinNumber)
+                const res = await postData('question/create', {
+                    pinNumber: data.data.pinNumber,
+                    questionNumber: 0,
+                    question: 'What is the first letter of the alphabet?',
+                    answer1: 'A',
+                    answer2: 'B',
+                    answer3: 'C',
+                    answer4: 'D',
+                    correctAnswer: 0,
+                })
+                console.log(res)
                 break;
             }
             number++;
         }
-        navigate('/questionset/create/' + pinNumber);
+        window.location.reload(false);
     }
 
     async function startGame(questionSet) {
@@ -44,7 +53,8 @@ export default function QuestionSets({
             state: 'open',
         }
         await postData('questionset/state', body);
-        dispatch(setPinNumber(questionSet.pinNumber));
+        sessionStorage.setItem('pinNumber', questionSet.pinNumber);
+        sessionStorage.setItem('name', "HOST");
         setTimeout(() => { navigate('/hosting') }, 1000);
     }
 

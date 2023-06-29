@@ -1,10 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { getData, postData } from "../../utils/api";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import Chat from "../../components/Chat";
+import messages from "../../../../constants/messages.json";
+import socketIOClient from "socket.io-client";
+
+const host = "http://localhost:3000";
 
 export default function GameHost() {
     const [waiting, setWaiting] = useState(true);
@@ -17,12 +20,20 @@ export default function GameHost() {
     const [correctAnswer, setCorrectAnswer] = useState(-1);
     const [questionSetName, setQuestionSetName] = useState("");
     const [gameEnded, setGameEnded] = useState(false);
-    const username = useSelector((state) => state.auth.username);
-    const pinNumber = useSelector((state) => state.session.pinNumber);
+    const [players, setPlayers] = useState([]);
+    const [id, setId] = useState("");
+    const name = sessionStorage.getItem("name");
+    const username = sessionStorage.getItem("username");
+    const pinNumber = sessionStorage.getItem("pinNumber");
+
+    const socketRef = useRef();
 
     const navigate = useNavigate();
 
     React.useEffect(() => {
+        if (!pinNumber || !username) {
+            navigate("/dashboard");
+        }
         async function getQuestionSet() {
             const body = {
                 pinNumber: pinNumber,
@@ -32,11 +43,27 @@ export default function GameHost() {
             if (data.success) {
                 setQuestionSetName(data.data.questionSetName);
             } else {
+                sessionStorage.removeItem("pinNumber");
                 navigate("/dashboard");
             }
         }
         getQuestionSet();
+
+        socketRef.current = socketIOClient.connect(host)
+
+        socketRef.current.emit(messages.CLIENT_HOST_WAIT, { pinNumber: pinNumber })
+
+        socketRef.current.on(messages.SERVER_SEND_ID, data => {
+            setId(data)
+        })
+
+        socketRef.current.on(messages.SERVER_PLAYER_JOIN, data => {
+            console.log(data)
+            setPlayers(players => [...players, data])
+        })
     }, []);
+
+    console.log(players)
 
     async function nextQuestion() {
         const body = {
@@ -45,17 +72,20 @@ export default function GameHost() {
         }
 
         const data = await postData('question', body)
-        console.log(data)
-        console.log(body)
+
         if (data.success) {
             if (waiting) setWaiting(false);
-            setQuestionNumber(data.data.questionNumber);
+
             setQuestion(data.data.question);
             setAnswer1(data.data.answer1);
             setAnswer2(data.data.answer2);
             setAnswer3(data.data.answer3);
             setAnswer4(data.data.answer4);
             setCorrectAnswer(data.data.correctAnswer);
+
+            socketRef.current.emit(messages.CLIENT_HOST_NEXT_QUESTION, body);
+
+            setQuestionNumber(data.data.questionNumber);
         } else {
             setGameEnded(true);
         }
@@ -71,6 +101,9 @@ export default function GameHost() {
                     waiting ?
                         <div>
                             <h2>Waiting for players to join...</h2>
+                            {players.map((player, index) => {
+                                return <div key={index}>{player.name}({player.id}) </div>
+                            })}
                             <button onClick={nextQuestion}>Start</button>
                         </div>
                         :
@@ -85,7 +118,12 @@ export default function GameHost() {
                             <button onClick={nextQuestion}>Next Question</button>
                         </div>
                 }
-                <button onClick={() => navigate("/dashboard")}>End Game</button>
+
+                <button onClick={() => {
+                    socketRef.current.emit(messages.CLIENT_HOST_END, { pinNumber: pinNumber });
+                    navigate("/dashboard")
+                    sessionStorage.removeItem("pinNumber");
+                }}>End Game</button>
 
             </div>
             <Chat />

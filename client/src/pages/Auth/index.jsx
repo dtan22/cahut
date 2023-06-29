@@ -1,10 +1,8 @@
 import "./styles.css"
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { postData } from '../../utils/api'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { setUsername } from '../../utils/slices/authSlice'
 
 export default function Auth() {
 
@@ -12,12 +10,18 @@ export default function Auth() {
     const [loginError, setLoginError] = useState('')
     const [signupError, setSignupError] = useState('')
 
-    const dispatch = useDispatch()
+    const username = sessionStorage.getItem('username')
 
     const navigate = useNavigate()
 
-    function authSuccess() {
-        dispatch(setUsername(inputs.loginUsername))
+    useEffect(() => {
+        if (username) {
+            navigate('/dashboard')
+        }
+    }, [])
+
+    function authSuccess(username) {
+        sessionStorage.setItem('username', username);
         setTimeout(() => { navigate('/dashboard') }, 1000);
     }
 
@@ -47,10 +51,8 @@ export default function Auth() {
 
         const data = await postData('login', credentials)
 
-        console.log(data)
-
         if (data.success) {
-            authSuccess()
+            authSuccess(username)
         } else {
             setLoginError(data.message)
         }
@@ -84,9 +86,9 @@ export default function Auth() {
         }
 
         const data = await postData('signup', credentials)
-        console.log(data)
+
         if (data.success) {
-            authSuccess()
+            authSuccess(username)
         } else {
             setSignupError(data.message)
         }

@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from "react-router-dom"
 import socketIOClient from "socket.io-client";
 
 import './styles.css'
@@ -14,17 +12,16 @@ export default function Chat() {
     const [message, setMessage] = useState('');
     const [id, setId] = useState('');
 
-    const auth = useSelector(state => state.auth)
-    const username = auth.username
+    const pinNumber = sessionStorage.getItem('pinNumber');
+    const name = sessionStorage.getItem('name');
+
     const socketRef = useRef();
     const messagesEnd = useRef();
-
-    const pinNumber = useSelector(state => state.session.pinNumber)
 
     useEffect(() => {
         socketRef.current = socketIOClient.connect(host)
 
-        socketRef.current.emit(messages.CLIENT_PLAYER_JOIN, { pinNumber: pinNumber })
+        socketRef.current.emit(messages.CLIENT_ENTER_CHAT, { pinNumber: pinNumber })
 
         socketRef.current.on(messages.SERVER_SEND_ID, data => {
             setId(data)
@@ -47,7 +44,8 @@ export default function Chat() {
             const msg = {
                 message: message,
                 id: id,
-                pinNumber: pinNumber
+                pinNumber: pinNumber,
+                name: name
             }
             socketRef.current.emit(messages.CLIENT_SEND_CHAT_MESSAGE, msg)
             setMessage('')
@@ -60,6 +58,7 @@ export default function Chat() {
 
     const renderMess = mess.map((m, index) =>
         <div key={index} className={`${m.id === id ? 'your-message' : 'other-people'} chat-item`}>
+            {m.name}:&nbsp;
             {m.message}
         </div>
     )

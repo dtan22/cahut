@@ -39,3 +39,26 @@
     padding: 10px;
     border-radius: 1em;
 }
+
+.answer-box:hover {
+    background-color: #e42eff;
+    cursor: pointer;
+}
+
+.correct-box {
+    text-align: center;
+    margin: 2vh 5vw;
+    box-shadow: 0 0 10px 0 white;
+    padding: 10px;
+    border-radius: 1em;
+    background-color: green;
+}
+
+.wrong-box {
+    text-align: center;
+    margin: 2vh 5vw;
+    box-shadow: 0 0 10px 0 white;
+    padding: 10px;
+    border-radius: 1em;
+    background-color: red;
+}

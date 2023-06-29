@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from 'react-redux'
-import { setPinNumber } from '../../utils/slices/sessionSlice'
 import { postData } from '../../utils/api'
 
 import "./styles.css"
@@ -12,7 +11,6 @@ export default function Landing() {
     const [nameText, setNameText] = useState('')
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     async function submitPin() {
         const data = {
@@ -22,11 +20,18 @@ export default function Landing() {
         const res = await postData('player-join', data)
 
         if (res.success) {
-            dispatch(setPinNumber(res.pinNumber))
+            sessionStorage.setItem('pinNumber', pinText)
+            sessionStorage.setItem('name', nameText)
             navigate("/game")
         } else {
             setError(res.message)
         }
+    }
+
+    function login() {
+        sessionStorage.removeItem('pinNumber')
+        sessionStorage.removeItem('name')
+        navigate("/auth")
     }
 
     return (
@@ -62,7 +67,7 @@ export default function Landing() {
             </div>
             <div className="login">
                 Want to create a game? &nbsp;
-                <a href={'/auth'}>Log in</a>;
+                <a onClick={login}>Log in</a>;
             </div>
         </div>
     )
