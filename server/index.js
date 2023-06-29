@@ -51,12 +51,12 @@ async function validatePIN(pinNumber) {
     return false
 }
 
-async function getQuestion(pinNumber, questioNumber) {
+async function getQuestion(pinNumber, questionNumber) {
     const Question = db.question
     const question = await Question.findOne({
         where: {
             pinNumber: pinNumber,
-            questioNumber: questioNumber
+            questionNumber: questionNumber
         }
     })
     return question
@@ -76,12 +76,13 @@ socketIo.on("connection", (socket) => {
     socket.on(messages.CLIENT_HOST_WAIT, (data) => {
         const { pinNumber } = data
         socket.join(pinNumber)
+        socket.join(pinNumber + "-host")
     })
 
     socket.on(messages.CLIENT_HOST_NEXT_QUESTION, async (data) => {
         const { pinNumber, questionNumber } = data
-        const question = await getQuestion(pinNumber, questionIndex)
-        socketIo.to(pinNumber).emit(messages.SERVER_QUESTION_START, { question, questionNumber })
+        const question = await getQuestion(pinNumber, questionNumber)
+        socketIo.to(pinNumber).emit(messages.SERVER_QUESTION_START, { question: question })
         setTimeout(async () => {
             socketIo.to(pinNumber).emit(messages.SERVER_QUESTION_END)
         }, 10000)
@@ -93,23 +94,30 @@ socketIo.on("connection", (socket) => {
     })
 
     socket.on(messages.CLIENT_PLAYER_JOIN, (data) => {
-        const { pinNumber } = data
+        const { pinNumber, name } = data
         if (validatePIN(pinNumber)) {
             console.log("Player joined: " + socket.id)
             socket.join(pinNumber)
+            socketIo.to(pinNumber + '-host').emit(messages.SERVER_PLAYER_JOIN, { name: name, id: socket.id })
         }
     })
 
     socket.on(messages.CLIENT_PLAYER_ANSWER, (data) => {
-        const { pinNumber, questionIndex, answerIndex } = data
-        const question = getQuestion(pinNumber, questionIndex)
-        socketIo.to(pinNumber).emit(messages.SERVER_PLAYER_ANSWER_RESPONSE, { correct: answerIndex == question.answerIndex })
+        const { pinNumber, answer, name } = data
+        socketIo.to(pinNumber + '-host').emit(messages.SERVER_PLAYER_ANSWER, { id: socket.id, answer: answer, name: name })
     })
 
-    socket.on(messages.CLIENT_SEND_CHAT_MESSAGE, function (data) {
-        const { message, id, pinNumber } = data
-        console.log(data)
-        socketIo.to(pinNumber).emit(messages.SERVER_SEND_CHAT_MESSAGE, { message, id })
+    socket.on(messages.CLIENT_ENTER_CHAT, (data) => {
+        const { pinNumber } = data
+        if (validatePIN(pinNumber)) {
+            console.log("Client enter chat: " + socket.id)
+            socket.join(pinNumber + "-chat")
+        }
+    })
+
+    socket.on(messages.CLIENT_SEND_CHAT_MESSAGE, (data) => {
+        const { message, id, pinNumber, name } = data
+        socketIo.to(pinNumber + "-chat").emit(messages.SERVER_SEND_CHAT_MESSAGE, { message, id, name })
     })
 
     socket.on("disconnect", () => {

@@ -1,15 +1,15 @@
 {
-    "SERVER_SEND_CHAT_MESSAGE": "server-send-chat-message",
-    "CLIENT_SEND_CHAT_MESSAGE": "client-send-chat-message",
     "SERVER_SEND_ID": "server-send-id",
-    "SERVER_PLAYER_JOIN_RESPONSE": "server-player-join-response",
-    "SERVER_PLAYER_ANSWER_RESPONSE": "server-player-answer-response",
-    "SERVER_QUESTION_START": "server-turn-start",
-    "SERVER_QUESTION_END": "server-turn-end",
-    "SERVER_GAME_END": "server-game-end",
+    "CLIENT_ENTER_CHAT": "client-enter-chat",
+    "CLIENT_SEND_CHAT_MESSAGE": "client-send-chat-message",
+    "SERVER_SEND_CHAT_MESSAGE": "server-send-chat-message",
     "CLIENT_HOST_WAIT": "client-host-wait",
     "CLIENT_HOST_NEXT_QUESTION": "client-host-next-question",
     "CLIENT_HOST_END": "client-host-end",
     "CLIENT_PLAYER_JOIN": "client-player-join",
-    "CLIENT_PLAYER_ANSWER": "client-player-answer"
+    "CLIENT_PLAYER_ANSWER": "client-player-answer",
+    "SERVER_PLAYER_JOIN": "server-player-join",
+    "SERVER_QUESTION_START": "server-turn-start",
+    "SERVER_QUESTION_END": "server-turn-end",
+    "SERVER_GAME_END": "server-game-end"
 }

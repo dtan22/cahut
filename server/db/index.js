@@ -20,12 +20,12 @@ db.questionSet = require('../models/questionSet.model')(sequelize, DataTypes);
 db.question = require('../models/question.model')(sequelize, DataTypes);
 
 db.questionSet.hasMany(db.question, {
-    foreignKey: 'questionSetId',
+    foreignKey: 'pinNumber',
     onDelete: 'cascade',
 });
 
 db.question.belongsTo(db.questionSet, {
-    foreignKey: 'questionSetId',
+    foreignKey: 'pinNumber',
 });
 
 sequelize.sync();
