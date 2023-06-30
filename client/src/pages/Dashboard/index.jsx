@@ -30,13 +30,20 @@ export default function Dashboard() {
         getQuestionSets();
     }, []);
     return (
-        <div>
+        <div className='dashboard-container'>
             <h1>Dashboard</h1>
             <QuestionSets questionSets={questionSets} />
-            <button onClick={() => {
-                sessionStorage.removeItem('username');
-                navigate('/auth')
-            }}>Logout</button>
+            <button
+                style={{
+                    width: '20vw',
+                    height: '10vh',
+                    margin: '2vh 0',
+                    fontSize: '2vw',
+                }}
+                onClick={() => {
+                    sessionStorage.removeItem('username');
+                    navigate('/auth')
+                }}>Logout</button>
         </div>
     )
 }
