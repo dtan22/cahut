@@ -8,7 +8,9 @@ export default function CreateQuestionSet() {
     const navigate = useNavigate();
     const auth = useSelector(state => state.auth);
     const username = auth.username;
-    const { questionSetId } = useParams();
+    const { pinNumber } = useParams();
+
+    console.log(pinNumber)
 
     const [questionSetName, setQuestionSetName] = React.useState('untitled');
     const [currentQuestion, setCurrentQuestion] = React.useState(0);
@@ -36,7 +38,7 @@ export default function CreateQuestionSet() {
         }
         async function getQuestionSet() {
             const qsetBody = {
-                questionSetId: questionSetId,
+                pinNumber: pinNumber,
                 username: username,
             }
             const qset = await postData('questionset', qsetBody);
@@ -46,7 +48,7 @@ export default function CreateQuestionSet() {
                 navigate('/dashboard');
             }
             const body = {
-                questionSetId: questionSetId,
+                pinNumber: pinNumber,
                 username: username,
             }
             const data = await postData('question/all', body);
@@ -107,7 +109,7 @@ export default function CreateQuestionSet() {
     function finish() {
         questionSet.forEach((value, index) => {
             const body = {
-                questionSetId: questionSetId,
+                pinNumber: pinNumber,
                 questionNumber: index,
                 question: value.question,
                 answer1: value.answer1,
@@ -121,7 +123,7 @@ export default function CreateQuestionSet() {
         });
         const body = {
             username: username,
-            questionSetId: questionSetId,
+            pinNumber: pinNumber,
             questionSetName: questionSetName,
         }
         postData('questionset/update', body)

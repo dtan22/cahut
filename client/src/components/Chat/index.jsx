@@ -14,26 +14,21 @@ export default function Chat() {
     const [message, setMessage] = useState('');
     const [id, setId] = useState('');
 
+    const auth = useSelector(state => state.auth)
+    const username = auth.username
     const socketRef = useRef();
     const messagesEnd = useRef();
 
     const pinNumber = useSelector(state => state.session.pinNumber)
 
-    console.log(mess)
-
-    const navigate = useNavigate()
-
     useEffect(() => {
-        if (!pinNumber) {
-            navigate("/")
-        }
         socketRef.current = socketIOClient.connect(host)
+
+        socketRef.current.emit(messages.CLIENT_PLAYER_JOIN, { pinNumber: pinNumber })
 
         socketRef.current.on(messages.SERVER_SEND_ID, data => {
             setId(data)
         })
-
-        socketRef.current.emit(messages.CLIENT_PLAYER_JOIN, { pinNumber: pinNumber })
 
         socketRef.current.on(messages.SERVER_SEND_CHAT_MESSAGE, data => {
             setMess(oldMsgs => [...oldMsgs, data])

@@ -29,7 +29,6 @@ export default function Landing() {
         }
     }
 
-
     return (
         <div className="landing">
             <div className="title">
@@ -42,14 +41,14 @@ export default function Landing() {
                     value={pinText}
                     onChange={e => setPinText(e.target.value)}
                     autoFocus={true}
-                    maxLength={10}
+                    maxLength={36}
                 />
                 <textarea
                     placeholder="Enter Name..."
                     value={nameText}
                     onChange={e => setNameText(e.target.value)}
                     autoFocus={false}
-                    maxLength={10}
+                    maxLength={36}
                 />
             </div>
             <div className="error-message">

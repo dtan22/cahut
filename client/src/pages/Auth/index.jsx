@@ -18,7 +18,7 @@ export default function Auth() {
 
     function authSuccess() {
         dispatch(setUsername(inputs.loginUsername))
-        navigate('/dashboard')
+        setTimeout(() => { navigate('/dashboard') }, 1000);
     }
 
     const handleChange = (event) => {
@@ -86,9 +86,7 @@ export default function Auth() {
         const data = await postData('signup', credentials)
         console.log(data)
         if (data.success) {
-            setTimeout(() => {
-                authSuccess()
-            }, 1000)
+            authSuccess()
         } else {
             setSignupError(data.message)
         }

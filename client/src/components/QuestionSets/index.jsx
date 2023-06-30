@@ -3,6 +3,7 @@ import "./styles.css"
 import { postData } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { setPinNumber } from '../../utils/slices/sessionSlice';
 
 export default function QuestionSets({
     questionSets,
@@ -20,7 +21,7 @@ export default function QuestionSets({
 
     async function createQuestionSet() {
         let number = 1;
-        let questionSetId = null;
+        let pinNumber = null;
         while (true) {
             const body = {
                 username: username,
@@ -28,16 +29,23 @@ export default function QuestionSets({
             }
             const data = await postData('questionset/create', body);
             if (data.success) {
-                questionSetId = data.questionSetId;
+                pinNumber = data.pinNumber;
                 break;
             }
             number++;
         }
-        navigate('/questionset/create/' + questionSetId);
+        navigate('/questionset/create/' + pinNumber);
     }
 
-    function startGame() {
-        navigate('/gamehost');
+    async function startGame(questionSet) {
+        const body = {
+            username: username,
+            pinNumber: questionSet.pinNumber,
+            state: 'open',
+        }
+        await postData('questionset/state', body);
+        dispatch(setPinNumber(questionSet.pinNumber));
+        setTimeout(() => { navigate('/hosting') }, 1000);
     }
 
     return (
@@ -50,11 +58,11 @@ export default function QuestionSets({
                 {questionSets.map((value, index) => {
                     return (
                         <div key={index}>
-                            <h2>{value.questionSetName}-({value.questionSetId})</h2>
-                            <button onClick={() => navigate('/questionset/create/' + value.questionSetId)}>
+                            <h2>{value.questionSetName}-({value.pinNumber})</h2>
+                            <button onClick={() => navigate('/questionset/create/' + value.pinNumber)}>
                                 Edit
                             </button>
-                            <button onClick={startGame}>
+                            <button onClick={() => startGame(value)}>
                                 Start
                             </button>
                         </div>
