@@ -64,8 +64,12 @@ export default function CreateQuestionSet() {
         getQuestionSet();
     }, []);
 
-    function saveCurQuestion() {
-        setQuestionSet(questionSet.map((value, index) => {
+
+    console.log(questionSet)
+
+    function changeQuestion(index) {
+        console.log(index)
+        setQuestionSet(questionSet => questionSet.map((value, index) => {
             if (index === currentQuestion) {
                 return {
                     question: question,
@@ -78,9 +82,6 @@ export default function CreateQuestionSet() {
             }
             return value;
         }));
-    }
-
-    function changeQuestion(index) {
         setCurrentQuestion(index);
         setQuestion(questionSet[index].question);
         setAnswer1(questionSet[index].answer1);
@@ -135,44 +136,74 @@ export default function CreateQuestionSet() {
     }
 
     return (
-        <div>
-            <textarea
-                value={questionSetName}
-                onChange={e => setQuestionSetName(e.target.value)}
-            />
-            <textarea
-                value={question}
-                onChange={e => setQuestion(e.target.value)}
-            />
-            <textarea
-                value={answer1}
-                onChange={e => setAnswer1(e.target.value)}
-            />
-            <textarea
-                value={answer2}
-                onChange={e => setAnswer2(e.target.value)}
-            />
-            <textarea
-                value={answer3}
-                onChange={e => setAnswer3(e.target.value)}
-            />
-            <textarea
-                value={answer4}
-                onChange={e => setAnswer4(e.target.value)}
-            />
-            <div>
-                Correct answer: {correctAnswer == 0 ? answer1 : correctAnswer == 1 ? answer2 : correctAnswer == 2 ? answer3 : answer4}
+        <div className='cqs'>
+            <div className='qs-attribute'>
+                Question Set Name:
+                <textarea
+                    value={questionSetName}
+                    onChange={e => setQuestionSetName(e.target.value)}
+                />
             </div>
-            <button onClick={incrementAnswer}>next Answer</button>
-            <button onClick={decrementAnswer}>previous Answer</button>
-            <button onClick={saveCurQuestion}>Save</button>
-            {questionSet.map((question, index) =>
-                <button key={index} onClick={() => changeQuestion(index)}>
-                    {index + 1}
-                </button>
-            )}
-            <button onClick={addNewQuestion}>+</button>
-            <button onClick={finish}>Finish</button>
+            <div className='qs-attribute'>
+                Question:
+                <textarea
+                    value={question}
+                    onChange={e => setQuestion(e.target.value)}
+                />
+            </div>
+            <div className='qs-attribute'>
+                Answer 1:
+                <textarea
+                    value={answer1}
+                    onChange={e => setAnswer1(e.target.value)}
+                />
+            </div>
+            <div className='qs-attribute'>
+                Answer 2:
+                <textarea
+                    value={answer2}
+                    onChange={e => setAnswer2(e.target.value)}
+                />
+            </div>
+            <div className='qs-attribute'>
+                Answer 3:
+                <textarea
+                    value={answer3}
+                    onChange={e => setAnswer3(e.target.value)}
+                />
+            </div>
+
+            <div className='qs-attribute'>
+                Answer 4:
+                <textarea
+                    value={answer4}
+                    onChange={e => setAnswer4(e.target.value)}
+                />
+            </div>
+
+            <div className='qs-attribute'>
+                <div className='correct-answer'>
+                    Correct answer:
+                    <button className='answer-button' onClick={decrementAnswer}>previous Answer</button>
+                    <div style={{
+                        textAlign: 'center',
+                        marginLeft: '2vw',
+                    }}>
+                        {correctAnswer == 0 ? answer1 : correctAnswer == 1 ? answer2 : correctAnswer == 2 ? answer3 : answer4}
+                    </div>
+                    <button className='answer-button' onClick={incrementAnswer}>next Answer</button>
+                </div>
+            </div>
+            <div className='question-select'>
+                {questionSet.map((question, index) =>
+                    <button key={index} onClick={() => changeQuestion(index)}>
+                        {index + 1}
+                    </button>
+                )}
+                <button onClick={addNewQuestion}>+</button>
+            </div>
+
+            <button onClick={finish}>Save and Finish</button>
         </div>
     )
 }
