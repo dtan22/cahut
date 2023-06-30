@@ -20,6 +20,11 @@ export default function Question() {
     const [correct, setCorrect] = React.useState(true);
     const [chosen, setChosen] = React.useState(-1);
     const [turnEnded, setTurnEnded] = React.useState(false);
+    const [showStat, setShowStat] = React.useState(false);
+    const [numAnswer1, setNumAnswer1] = React.useState(0);
+    const [numAnswer2, setNumAnswer2] = React.useState(0);
+    const [numAnswer3, setNumAnswer3] = React.useState(0);
+    const [numAnswer4, setNumAnswer4] = React.useState(0);
 
     const pinNumber = sessionStorage.getItem('pinNumber');
     const name = sessionStorage.getItem('name');
@@ -39,6 +44,8 @@ export default function Question() {
         })
 
         socketRef.current.on(messages.SERVER_QUESTION_START, data => {
+            setTurnEnded(false)
+            setShowStat(false)
             setAnswered(false)
             setCorrect(true)
             setWaiting(false)
@@ -53,6 +60,15 @@ export default function Question() {
         socketRef.current.on(messages.SERVER_QUESTION_END, data => {
             setWaiting(true)
             setTurnEnded(true)
+        })
+
+        socketRef.current.on(messages.SERVER_SHOW_STAT, data => {
+            setTurnEnded(true)
+            setShowStat(true)
+            setNumAnswer1(data.numAnswer1)
+            setNumAnswer2(data.numAnswer2)
+            setNumAnswer3(data.numAnswer3)
+            setNumAnswer4(data.numAnswer4)
         })
 
         socketRef.current.on(messages.SERVER_GAME_END, data => {
@@ -81,7 +97,13 @@ export default function Question() {
 
     return (
         <>
-            {waiting ? <h1>Waiting for question...</h1> :
+            {turnEnded && showStat ? <div>
+                <div>Num of people choose answer 1: {numAnswer1}</div>
+                <div>Num of people choose answer 2: {numAnswer2}</div>
+                <div>Num of people choose answer 3: {numAnswer3}</div>
+                <div>Num of people choose answer 4: {numAnswer4}</div>
+                <div>Correct Answer: {correctAnswer + 1}</div>
+            </div> : waiting ? <h1>Waiting for question...</h1> :
                 <div>
                     <div className="question-container">
                         <div className="question-box">

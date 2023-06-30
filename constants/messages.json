@@ -4,12 +4,15 @@
     "CLIENT_SEND_CHAT_MESSAGE": "client-send-chat-message",
     "SERVER_SEND_CHAT_MESSAGE": "server-send-chat-message",
     "CLIENT_HOST_WAIT": "client-host-wait",
+    "CLIENT_HOST_SHOW_STAT": "client-host-quest-end",
     "CLIENT_HOST_NEXT_QUESTION": "client-host-next-question",
     "CLIENT_HOST_END": "client-host-end",
     "CLIENT_PLAYER_JOIN": "client-player-join",
     "CLIENT_PLAYER_ANSWER": "client-player-answer",
     "SERVER_PLAYER_JOIN": "server-player-join",
     "SERVER_QUESTION_START": "server-turn-start",
+    "SERVER_PLAYER_ANSWER": "server-player-answer",
     "SERVER_QUESTION_END": "server-turn-end",
+    "SERVER_SHOW_STAT": "server-show-stat",
     "SERVER_GAME_END": "server-game-end"
 }

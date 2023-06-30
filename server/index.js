@@ -22,19 +22,6 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyparser.urlencoded({ extended: false }))
 
-const tempQuestions = [
-    {
-        question: "What is the capital of India?",
-        options: ["Delhi", "Mumbai", "Kolkata", "Chennai"],
-        answerIndex: 0
-    },
-    {
-        question: "What is the capital of USA?",
-        options: ["New York", "Washington DC", "Los Angeles", "Chicago"],
-        answerIndex: 1
-    }
-]
-
 const db = require("./db")
 
 async function validatePIN(pinNumber) {
@@ -79,11 +66,17 @@ socketIo.on("connection", (socket) => {
         socket.join(pinNumber + "-host")
     })
 
+    socket.on(messages.CLIENT_HOST_SHOW_STAT, (data) => {
+        const { pinNumber } = data
+        console.log(data)
+        socketIo.to(pinNumber).emit(messages.SERVER_SHOW_STAT, data)
+    })
+
     socket.on(messages.CLIENT_HOST_NEXT_QUESTION, async (data) => {
         const { pinNumber, questionNumber } = data
         const question = await getQuestion(pinNumber, questionNumber)
         socketIo.to(pinNumber).emit(messages.SERVER_QUESTION_START, { question: question })
-        setTimeout(async () => {
+        setTimeout(() => {
             socketIo.to(pinNumber).emit(messages.SERVER_QUESTION_END)
         }, 10000)
     })

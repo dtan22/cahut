@@ -21,10 +21,15 @@ export default function GameHost() {
     const [questionSetName, setQuestionSetName] = useState("");
     const [gameEnded, setGameEnded] = useState(false);
     const [players, setPlayers] = useState([]);
-    const [id, setId] = useState("");
-    const name = sessionStorage.getItem("name");
+    const [turnEnded, setTurnEnded] = useState(false);
+    const [showStat, setShowStat] = useState(false);
     const username = sessionStorage.getItem("username");
     const pinNumber = sessionStorage.getItem("pinNumber");
+
+    const [numAnswer1, setNumAnswer1] = useState(0);
+    const [numAnswer2, setNumAnswer2] = useState(0);
+    const [numAnswer3, setNumAnswer3] = useState(0);
+    const [numAnswer4, setNumAnswer4] = useState(0);
 
     const socketRef = useRef();
 
@@ -58,8 +63,18 @@ export default function GameHost() {
         })
 
         socketRef.current.on(messages.SERVER_PLAYER_JOIN, data => {
-            console.log(data)
             setPlayers(players => [...players, data])
+        })
+
+        socketRef.current.on(messages.SERVER_PLAYER_ANSWER, data => {
+            if (data.answer == 0) setNumAnswer1(numAnswer1 => numAnswer1 + 1)
+            if (data.answer == 1) setNumAnswer2(numAnswer2 => numAnswer2 + 1)
+            if (data.answer == 2) setNumAnswer3(numAnswer3 => numAnswer3 + 1)
+            if (data.answer == 3) setNumAnswer4(numAnswer4 => numAnswer4 + 1)
+        })
+
+        socketRef.current.on(messages.SERVER_QUESTION_END, data => {
+            setTurnEnded(true)
         })
     }, []);
 
@@ -75,6 +90,8 @@ export default function GameHost() {
 
         if (data.success) {
             if (waiting) setWaiting(false);
+            setTurnEnded(false);
+            setShowStat(false);
 
             setQuestion(data.data.question);
             setAnswer1(data.data.answer1);
@@ -82,6 +99,10 @@ export default function GameHost() {
             setAnswer3(data.data.answer3);
             setAnswer4(data.data.answer4);
             setCorrectAnswer(data.data.correctAnswer);
+            setNumAnswer1(0);
+            setNumAnswer2(0);
+            setNumAnswer3(0);
+            setNumAnswer4(0);
 
             socketRef.current.emit(messages.CLIENT_HOST_NEXT_QUESTION, body);
 
@@ -89,6 +110,18 @@ export default function GameHost() {
         } else {
             setGameEnded(true);
         }
+    }
+
+    async function showStatistic() {
+        const body = {
+            pinNumber: pinNumber,
+            numAnswer1: numAnswer1,
+            numAnswer2: numAnswer2,
+            numAnswer3: numAnswer3,
+            numAnswer4: numAnswer4,
+        }
+
+        socketRef.current.emit(messages.CLIENT_HOST_SHOW_STAT, body);
     }
 
     return (
@@ -115,7 +148,8 @@ export default function GameHost() {
                             <h2>Answer 3: {answer3}</h2>
                             <h2>Answer 4: {answer4}</h2>
                             <h2>Correct Answer: {correctAnswer + 1}</h2>
-                            <button onClick={nextQuestion}>Next Question</button>
+                            {turnEnded && <button onClick={nextQuestion}>Next Question</button>}
+                            {turnEnded && <button onClick={showStatistic}>Show Statistic</button>}
                         </div>
                 }
 
