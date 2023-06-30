@@ -58,8 +58,9 @@ export default function Chat() {
 
     const renderMess = mess.map((m, index) =>
         <div key={index} className={`${m.id === id ? 'your-message' : 'other-people'} chat-item`}>
-            {m.name}:&nbsp;
-            {m.message}
+            <p>
+                {m.name}:&nbsp;{m.message}
+            </p>
         </div>
     )
 

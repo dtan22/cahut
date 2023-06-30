@@ -1,35 +1,35 @@
-.question-container {
+.game-container {
     position: absolute;
-    text-align: center;
     top: 0;
-    bottom: 40%;
     left: 0;
-    right: 50%;
+    width: 40vw;
+    height: 80vh;
+    padding: 10vh 5vw;
     background-color: black;
-    color: white
+    color: white;
+}
+
+.question-answer-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.question-container {
+    height: 30vh;
 }
 
 .question-box {
-    position: absolute;
     text-align: center;
-    margin: 12vh 5vw;
-    top: 0;
-    left: 0;
-    right: 0;
+    margin: 2vh 1vw;
     box-shadow: 0 0 10px 0 white;
     padding: 10px;
     border-radius: 1em;
 }
 
 .answer-container {
-    position: absolute;
     text-align: center;
-    top: 60%;
-    bottom: 0;
-    left: 0;
-    right: 50%;
-    background-color: black;
-    color: white;
 }
 
 .answer-box {
@@ -61,4 +61,24 @@
     padding: 10px;
     border-radius: 1em;
     background-color: red;
+}
+
+.statistic {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 35vw;
+}
+
+.statistic-box {
+    text-align: left;
+    box-shadow: 0 0 10px 0 white;
+    padding: 10px 10px;
+    margin-top: 2vh;
+    margin-right: 2vw;
+    border-radius: 10px;
+    font-size: 6vh;
+    height: 10vh;
 }

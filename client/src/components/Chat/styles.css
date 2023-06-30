@@ -1,9 +1,10 @@
 .chat-container {
     position: absolute;
     top: 0;
-    bottom: 0;
-    left: 50%;
-    right: 0;
+    left: 50vw;
+    width: 50vw;
+    height: 100vh;
+    font-size: 2vh;
 }
 
 .chat-item {
@@ -12,21 +13,24 @@
 
 .your-message {
     background: #009bff;
-    margin: 1em;
-    border-radius: 1em;
-    padding: 1em;
+    margin: 1vh;
+    border-radius: 1vh;
+    padding: 1vh 1vw;
     color: white;
     float: right;
+    word-wrap: break-word;
 }
 
 .other-people {
     background: #868686;
-    margin: 1em;
-    border-radius: 1em;
-    padding: 1em;
+    margin: 1vh;
+    border-radius: 1vh;
+    padding: 1vh 1vw;
     color: white;
+    float: right;
     text-align: left;
     float: left;
+    word-wrap: break-word;
 }
 
 .box-chat_message {
@@ -40,13 +44,15 @@
     margin: 0 auto;
     margin-top: 10%;
     box-shadow: 0 0 10px 0 black;
+    background-color: white;
     padding: 10px;
     border-radius: 1em;
 }
 
 .send-box {
     width: 100%;
-    padding: 1em;
+    display: flex;
+    justify-content: space-around
 }
 
 textarea {
@@ -61,7 +67,7 @@ textarea {
 }
 
 button {
-    width: 10%;
+    width: 10vw;
     background: #6650ff;
     color: white;
     margin-left: 10px;
@@ -70,7 +76,6 @@ button {
     cursor: pointer;
     padding: 1em;
     text-align: center;
-
 }
 
 button:hover {

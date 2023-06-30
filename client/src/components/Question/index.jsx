@@ -95,19 +95,41 @@ export default function Question() {
         }
     }
 
+    const totalAnswer = numAnswer1 + numAnswer2 + numAnswer3 + numAnswer4
+    const percentAnswer1 = totalAnswer ? numAnswer1 * 100 / totalAnswer : 0
+    const percentAnswer2 = totalAnswer ? numAnswer2 * 100 / totalAnswer : 0
+    const percentAnswer3 = totalAnswer ? numAnswer3 * 100 / totalAnswer : 0
+    const percentAnswer4 = totalAnswer ? numAnswer4 * 100 / totalAnswer : 0
+
     return (
-        <>
-            {turnEnded && showStat ? <div>
-                <div>Num of people choose answer 1: {numAnswer1}</div>
-                <div>Num of people choose answer 2: {numAnswer2}</div>
-                <div>Num of people choose answer 3: {numAnswer3}</div>
-                <div>Num of people choose answer 4: {numAnswer4}</div>
+        <div className='game-container'>
+            {turnEnded && showStat ? <div className='statistic'>
+                <h1>Statistic</h1>
+                <div className='statistic-box' style={{
+                    width: `${percentAnswer1}%`,
+                    backgroundColor: 'red',
+                }} >{numAnswer1 ? numAnswer1 : null} </div>
+                <div className='statistic-box' style={{
+                    width: `${percentAnswer2}%`,
+                    backgroundColor: 'blue',
+                }} > {numAnswer2 ? numAnswer2 : null}</div>
+                <div className='statistic-box' style={{
+                    width: `${percentAnswer3}%`,
+                    backgroundColor: 'green',
+                }} > {numAnswer3 ? numAnswer3 : null}</div>
+                <div className='statistic-box' style={{
+                    width: `${percentAnswer4}%`,
+                    backgroundColor: 'yellow',
+                }} > {numAnswer4 ? numAnswer4 : null}</div>
                 <div>Correct Answer: {correctAnswer + 1}</div>
-            </div> : waiting ? <h1>Waiting for question...</h1> :
+            </div> : waiting ?
                 <div>
+                    <h1>Waiting for question...</h1>
+                </div> :
+                <div className='question-answer-container'>
                     <div className="question-container">
                         <div className="question-box">
-                            {question}
+                            <p>{question}</p>
                         </div>
                     </div>
                     <div className="answer-container">
@@ -132,6 +154,6 @@ export default function Question() {
                     </div>
                 </div>
             }
-        </>
+        </div>
     )
 }

@@ -13,6 +13,11 @@ export default function Landing() {
     const navigate = useNavigate()
 
     async function submitPin() {
+        if (nameText.length === 0) {
+            setError('Please enter a name')
+            return
+        }
+
         const data = {
             pinNumber: pinText
         }
@@ -60,6 +65,10 @@ export default function Landing() {
             </div>
             <div className="submit-pin">
                 <button
+                    style={{
+                        width: '30vw',
+                        fontSize: '3vh',
+                    }}
                     onClick={submitPin}>
                     Join Room
                 </button>
