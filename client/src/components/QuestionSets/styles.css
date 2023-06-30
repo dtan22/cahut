@@ -1,0 +1,12 @@
+.question-sets-container {
+    padding-left: 3vw;
+    padding-bottom: 5vh;
+    border-radius: 10px;
+    background-color: #1a1a1a;
+    margin-top: 5vh;
+    width: 80vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}

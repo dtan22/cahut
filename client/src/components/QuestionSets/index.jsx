@@ -60,11 +60,26 @@ export default function QuestionSets({
 
     return (
         <div>
-            <h1>Question Sets</h1>
-            <button onClick={createQuestionSet}>
-                Create Question Set
-            </button>
-            <div>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                padding: '10px',
+                alignItems: 'center',
+                borderRadius: '10px',
+                backgroundColor: 'white',
+                color: 'black',
+                boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
+            }}>
+                <h1>Question Sets</h1>
+                <button style={{
+                    width: '20vw',
+                    height: '10vh',
+                }} onClick={createQuestionSet}>
+                    Add new question set
+                </button>
+            </div>
+            <div className='question-sets-container'>
                 {questionSets.map((value, index) => {
                     return (
                         <div key={index}>
