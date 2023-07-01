@@ -125,40 +125,53 @@ export default function GameHost() {
     }
 
     return (
-        <div>
-            <h1>Game Host</h1>
+        <div className="gamehost-container">
+            <button onClick={() => {
+                socketRef.current.emit(messages.CLIENT_HOST_END, { pinNumber: pinNumber });
+                navigate("/dashboard")
+                sessionStorage.removeItem("pinNumber");
+            }}>End Game</button>
             <div>
-                <h2>Question Set: {questionSetName}</h2>
-                <h2>Pin Number: {pinNumber}</h2>
-                {gameEnded ? <h2>Game Ended</h2> :
+                <div className="questionset-info-box">
+                    <h2>Question Set: {questionSetName}</h2>
+                    <h2>Pin Number: {pinNumber}</h2>
+                </div>
+                {gameEnded ? <div style={{
+                    width: "100%",
+                    height: "100%",
+                    color: "black",
+                    textAlign: "center",
+                }}><h2>No question left...</h2></div> :
                     waiting ?
-                        <div>
+                        <div className="waiting-box">
                             <h2>Waiting for players to join...</h2>
-                            {players.map((player, index) => {
-                                return <div key={index}>{player.name}({player.id}) </div>
-                            })}
                             <button onClick={nextQuestion}>Start</button>
+                            <div className="player-name-container">
+                                {players.map((player, index) => {
+                                    return <div key={index} className="player-name-box">{player.name}</div>
+                                })}
+                            </div>
                         </div>
                         :
-                        <div>
-                            <h2>Question Number: {questionNumber}</h2>
+                        <div className="question-info-box">
+                            <h2>Question Number: {questionNumber + 1}</h2>
                             <h2>Question: {question}</h2>
-                            <h2>Answer 1: {answer1}</h2>
-                            <h2>Answer 2: {answer2}</h2>
-                            <h2>Answer 3: {answer3}</h2>
-                            <h2>Answer 4: {answer4}</h2>
+                            <div>Answer 1: {answer1}</div>
+                            <div>Answer 2: {answer2}</div>
+                            <div>Answer 3: {answer3}</div>
+                            <div>Answer 4: {answer4}</div>
                             <h2>Correct Answer: {correctAnswer + 1}</h2>
-                            {turnEnded && <button onClick={nextQuestion}>Next Question</button>}
-                            {turnEnded && <button onClick={showStatistic}>Show Statistic</button>}
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                width: "100%",
+                            }}>
+                                {turnEnded && <button onClick={nextQuestion}>Next Question</button>}
+                                {turnEnded && <button onClick={showStatistic}>Show Statistic</button>}
+                            </div>
                         </div>
                 }
-
-                <button onClick={() => {
-                    socketRef.current.emit(messages.CLIENT_HOST_END, { pinNumber: pinNumber });
-                    navigate("/dashboard")
-                    sessionStorage.removeItem("pinNumber");
-                }}>End Game</button>
-
             </div>
             <Chat />
         </div>

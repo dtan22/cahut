@@ -101,6 +101,8 @@ export default function Question() {
     const percentAnswer3 = totalAnswer ? numAnswer3 * 100 / totalAnswer : 0
     const percentAnswer4 = totalAnswer ? numAnswer4 * 100 / totalAnswer : 0
 
+    console.log(numAnswer1, numAnswer2, numAnswer3, numAnswer4)
+
     return (
         <div className='game-container'>
             {turnEnded && showStat ? <div className='statistic'>

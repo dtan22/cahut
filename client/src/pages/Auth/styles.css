@@ -16,9 +16,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 1);
     border-radius: 10px;
-    background-color: #243f34;
+
     height: 70vh;
 }
 
@@ -78,8 +78,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    background-color: #243f34;
+    box-shadow: 0 0 10px 0 white;
+    background-color: white;
+    color: black;
 }
 
 .signup-form {

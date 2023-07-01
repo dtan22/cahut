@@ -137,6 +137,9 @@ export default function CreateQuestionSet() {
 
     return (
         <div className='cqs'>
+            <h1>
+                Create Question Set
+            </h1>
             <div className='qs-attribute'>
                 Question Set Name:
                 <textarea
@@ -185,13 +188,14 @@ export default function CreateQuestionSet() {
                 <div className='correct-answer'>
                     Correct answer:
                     <button className='answer-button' onClick={decrementAnswer}>previous Answer</button>
+                    <button className='answer-button' onClick={incrementAnswer}>next Answer</button>
                     <div style={{
                         textAlign: 'center',
                         marginLeft: '2vw',
                     }}>
                         {correctAnswer == 0 ? answer1 : correctAnswer == 1 ? answer2 : correctAnswer == 2 ? answer3 : answer4}
                     </div>
-                    <button className='answer-button' onClick={incrementAnswer}>next Answer</button>
+
                 </div>
             </div>
             <div className='question-select'>
@@ -200,9 +204,8 @@ export default function CreateQuestionSet() {
                         {index + 1}
                     </button>
                 )}
-                <button onClick={addNewQuestion}>+</button>
+                {questionSet.length < 5 && <button onClick={addNewQuestion}>+</button>}
             </div>
-
             <button onClick={finish}>Save and Finish</button>
         </div>
     )

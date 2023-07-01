@@ -1,0 +1,59 @@
+.gamehost-container {
+    position: absolute;
+    left: 0;
+    width: 50vw;
+    height: 94 vh;
+    font-size: 2vh;
+    padding: 2vh 2vw;
+}
+
+.questionset-info-box {
+    text-align: center;
+    margin: 2vh 1vw;
+    box-shadow: 0 0 10px 0 black;
+    padding: 10px;
+    border-radius: 1em;
+    color: black;
+    background-color: white;
+}
+
+.waiting-box {
+    margin: 2vh 1vw;
+    box-shadow: 0 0 10px 0 black;
+    padding: 10px;
+    border-radius: 1em;
+    color: black;
+    background-color: white;
+    text-align: center;
+}
+
+.player-name-container {
+    display: flex;
+    justify-content: baseline;
+    flex-wrap: wrap;
+}
+
+.player-name-box {
+    text-align: center;
+    margin: 2vh 1vw;
+    box-shadow: 0 0 10px 0 black;
+    padding: 10px;
+    border-radius: 1em;
+    width: fit-content;
+
+    font-weight: bold;
+    font-size: 1.5em;
+    color: white;
+    background-color: #213547;
+}
+
+.question-info-box {
+    display: flex;
+    flex-direction: column;
+    margin: 1vh 1vw;
+    box-shadow: 0 0 10px 0 black;
+    padding: 10px;
+    border-radius: 1em;
+    color: black;
+    background-color: white;
+}

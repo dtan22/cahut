@@ -39,6 +39,8 @@ export default function Dashboard() {
                     height: '10vh',
                     margin: '2vh 0',
                     fontSize: '2vw',
+                    textAlign: 'center',
+                    padding: '1vh 0vw',
                 }}
                 onClick={() => {
                     sessionStorage.removeItem('username');

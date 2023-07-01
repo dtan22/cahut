@@ -13,11 +13,14 @@ export default function Landing() {
     const navigate = useNavigate()
 
     async function submitPin() {
+        if (pinText.length !== 36) {
+            setError('Please enter a valid pin')
+            return
+        }
         if (nameText.length === 0) {
             setError('Please enter a name')
             return
         }
-
         const data = {
             pinNumber: pinText
         }
@@ -57,7 +60,7 @@ export default function Landing() {
                     value={nameText}
                     onChange={e => setNameText(e.target.value)}
                     autoFocus={false}
-                    maxLength={36}
+                    maxLength={10}
                 />
             </div>
             <div className="error-message">
@@ -68,6 +71,7 @@ export default function Landing() {
                     style={{
                         width: '30vw',
                         fontSize: '3vh',
+                        height: '10vh',
                     }}
                     onClick={submitPin}>
                     Join Room
