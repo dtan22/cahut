@@ -64,11 +64,7 @@ export default function CreateQuestionSet() {
         getQuestionSet();
     }, []);
 
-
-    console.log(questionSet)
-
     function changeQuestion(index) {
-        console.log(index)
         setQuestionSet(questionSet => questionSet.map((value, index) => {
             if (index === currentQuestion) {
                 return {
@@ -104,7 +100,19 @@ export default function CreateQuestionSet() {
     }
 
     function finish() {
-        questionSet.forEach((value, index) => {
+        setQuestionSet(questionSet => questionSet.map((value, index) => {
+            if (index === currentQuestion) {
+                return {
+                    question: question,
+                    answer1: answer1,
+                    answer2: answer2,
+                    answer3: answer3,
+                    answer4: answer4,
+                    correctAnswer: correctAnswer,
+                }
+            }
+            return value;
+        }).map((value, index) => {
             const body = {
                 pinNumber: pinNumber,
                 questionNumber: index,
@@ -116,8 +124,8 @@ export default function CreateQuestionSet() {
                 correctAnswer: value.correctAnswer,
             }
             postData('question/create', body)
-
-        });
+            return value
+        }));
         const body = {
             username: username,
             pinNumber: pinNumber,
