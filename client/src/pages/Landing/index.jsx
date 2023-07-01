@@ -40,7 +40,6 @@ export default function Landing() {
                 Cahut
             </div>
             <div className="text-input" >
-
                 <textarea
                     placeholder="Enter PIN..."
                     value={pinText}
