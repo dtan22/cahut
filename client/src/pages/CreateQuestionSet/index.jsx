@@ -89,7 +89,19 @@ export default function CreateQuestionSet() {
 
     function addNewQuestion() {
         const index = questionSet.length
-        setQuestionSet([...questionSet, ...defaultQuestionSet]);
+        setQuestionSet(questionSet => [...questionSet.map((value, index) => {
+            if (index === currentQuestion) {
+                return {
+                    question: question,
+                    answer1: answer1,
+                    answer2: answer2,
+                    answer3: answer3,
+                    answer4: answer4,
+                    correctAnswer: correctAnswer,
+                }
+            }
+            return value;
+        }), ...defaultQuestionSet]);
         setCurrentQuestion(index);
         setQuestion(defaultQuestionSet[0].question);
         setAnswer1(defaultQuestionSet[0].answer1);
