@@ -24,6 +24,9 @@
     text-align: center;
     margin: 2vh 1vw;
     box-shadow: 0 0 10px 0 white;
+    color: black;
+    font-weight: bold;
+    background-color: white;
     padding: 10px;
     border-radius: 1em;
 }

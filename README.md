@@ -1,18 +1,25 @@
+# Clone repo
+    
+```bash
+git clone https://github.com/dtan22/cahut.git
+cd cahut
+```
+
 # Install packages
 
 ```bash
-$ npm install
-$ cd client
-$ npm install
-$ cd ..
-$ cd server
-$ npm install
+npm install
+cd client
+npm install
+cd ..
+cd server
+npm install
 ```
 
 # Start server
 
 ```bash
-$ npm run server
+npm run server
 ```
 
 # Start client
@@ -20,13 +27,13 @@ $ npm run server
 Start playing with the client at [http://localhost:5173/](http://localhost:5173)
 
 ```bash
-$ npm run client
+npm run client
 ```
 
 # Start both
 
 ```bash
-$ npm run dev
+npm run dev
 ```
 
 # Gameflow
