@@ -1,0 +1,29 @@
+.logo {
+    margin-right: 5px;
+  }
+
+.logo-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.header_links {
+    display: flex;
+    align-items: center;
+  }
+  
+.button {
+    display: flex;
+    align-items: center;
+  }
+  
+.button img {
+    width: 20px; /* Điều chỉnh kích thước ảnh */
+    height: auto; /* Đảm bảo tỷ lệ khung hình */
+  }
+  
+.button--outline {
+    text-align: left; /* Căn trái nút */
+}

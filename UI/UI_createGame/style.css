@@ -1,0 +1,744 @@
+:root {
+    font-family: 'Inter', sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+    :root {
+        font-family: 'Inter var', sans-serif;
+    }
+}
+
+
+body {
+    background-color: #dc9fd1;
+}
+
+nav{
+    position: absolute;
+    left: 800px;
+
+    font-family: 'Inter';
+    font-weight: bold;
+}
+
+li{
+    
+    display: inline-block;
+    max-width: 150px;
+
+
+    position:relative;
+    color: black;
+    transition: 0.4s all ease;
+    cursor: pointer;
+   
+    margin-right: 50px;
+    margin-top: 0px;
+    height: 20px;
+    font-size: 120%;
+  
+}
+li:hover{
+    color: pink;
+    transition: 0.4s all ease;
+}
+li::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: rgba(40, 3, 68, 0.867);
+    transform-origin: bottom right;
+    transition: transform 0.5s ease-out;
+}
+li:hover::after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+
+/* Rectangle 17 */
+
+.rec17 {
+    position: absolute;
+    width: 1440px;
+    height: 61px;
+    left: 0px;
+    top: 962px;
+
+    background: rgba(255, 204, 204, 0.41);
+}
+
+/* Rectangle 4 */
+
+.rec4 {
+    position: absolute;
+    width: 1357px;
+    height: 766px;
+    left: 41px;
+    top: 149px;
+
+    background: rgba(255, 204, 204, 0.41);
+}
+
+/* Rectangle 19 */
+
+.rec19 {
+    position: absolute;
+    width: 56px;
+    height: 27px;
+    left: 1340px;
+    top: 979px;
+
+    background: #C93CB2;
+    border-radius: 13.5px;
+}
+
+/* Rectangle 20 */
+
+.rec20 {
+    position: absolute;
+    width: 56px;
+    height: 27px;
+    left: 1257px;
+    top: 979px;
+
+    background: #D9D9D9;
+    border-radius: 13.5px;
+}
+
+/* Rectangle 1 */
+
+.rec1 {
+    position: absolute;
+    width: 1440px;
+    height: 53px;
+    left: 0px;
+    top: 0px;
+
+    background: rgba(44, 62, 143, 0.477);
+    background-blend-mode: darken;
+}
+
+/* Untitled Quiz */
+
+.titleQuiz {
+    position: absolute;
+    width: 100px;
+    height: 18px;
+    left: calc(50% - 86px/2 - 640px);
+    top: 14px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    mix-blend-mode: screen;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Rectangle 2 */
+
+.rec2 {
+    position: absolute;
+    width: 1440px;
+    height: 62px;
+    left: 0px;
+    top: 53px;
+
+    background: #B95CC2;
+}
+
+/* Rectangle 3 */
+
+.rec3 {
+    position: absolute;
+    width: 162px;
+    height: 32px;
+    left: 1245px;
+    top: 68px;
+
+    background: rgba(255, 204, 204, 0.41);
+    border-radius: 6px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+}
+
+/* Point : */
+
+.point {
+    position: absolute;
+    width: 32px;
+    height: 16px;
+    left: 1250px;
+    top: 76px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+}
+
+
+/* Rectangle 7 chèn hình ảnh*/
+
+.rec7 {
+    position: absolute;
+    width: 88px;
+    height: 86px;
+    left: 147px;
+    top: 209px;
+
+    background: url(Screenshot\ 2023-05-06\ 232338.png);
+}
+
+/* Rectangle 10 chèn âm thanh*/
+
+.rec10 {
+    position: absolute;
+    width: 88px;
+    height: 86px;
+    left: 147px;
+    top: 318px;
+
+    background: url(Screenshot\ 2023-05-06\ 232455.png);
+}
+
+/* Rectangle 11 chèn video*/
+
+.rec11 {
+    position: absolute;
+    width: 88px;
+    height: 86px;
+    left: 147px;
+    top: 428px;
+
+    background: url(Screenshot\ 2023-05-06\ 232518.png);
+}
+
+
+/* Rectangle 12 */
+
+.rec12 {
+    position: absolute;
+    width: 259px;
+    height: 265px;
+    left: 392px;
+    top: 597px;
+
+    background: #6EC892;
+    border-radius: 27px;
+}
+
+/* Type an answer option here... */
+
+.answerOption1 {
+    position: absolute;
+    width: 197px;
+    height: 98px;
+    left: 131px;
+    top: 680px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+
+/* Rectangle 14 */
+
+.rec14 {
+    position: absolute;
+    width: 259px;
+    height: 265px;
+    left: 684px;
+    top: 597px;
+
+    background: linear-gradient(0deg, #C1C522, #C1C522), #C5C835;
+    border-radius: 27px;
+}
+
+/* Type an answer option here... */
+
+.answerOption2 {
+    position: absolute;
+    width: 197px;
+    height: 98px;
+    left: 423px;
+    top: 680px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+
+/* Rectangle 15 */
+
+.rec15 {
+    position: absolute;
+    width: 261px;
+    height: 265px;
+    left: 975px;
+    top: 597px;
+
+    background: linear-gradient(0deg, #DF724F, #DF724F), #C5C835;
+    border-radius: 27px;
+}
+
+/* Type an answer option here... */
+
+.answerOption3 {
+    position: absolute;
+    width: 197px;
+    height: 98px;
+    left: 715px;
+    top: 680px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+/* Type an answer option here... */
+
+.answerOption4 {
+    position: absolute;
+    width: 197px;
+    height: 98px;
+    left: 1007px;
+    top: 680px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+
+/* Rectangle 13 */
+
+.rec13 {
+    position: absolute;
+    width: 259px;
+    height: 265px;
+    left: 100px;
+    top: 597px;
+
+    background: linear-gradient(0deg, #3E7DDC, #3E7DDC), #C5C835;
+    border-radius: 29px;
+}
+
+/* Rectangle 16 */
+
+.rec16 {
+    position: absolute;
+    width: 1040px;
+    height: 372px;
+    left: 284px;
+    top: 190px;
+
+    background: rgba(255, 204, 204, 0.41);
+    border: 1px solid #000000;
+    border-radius: 59px;
+}
+
+/* Enter your question here... */
+
+.question {
+    position: absolute;
+    width: 523px;
+    height: 40px;
+    left: 570px;
+    top: 350px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+
+    mix-blend-mode: normal;
+}
+
+/* More than one correct answer */
+
+.moreCorrect {
+    position: absolute;
+    width: 250px;
+    height: 44px;
+    left: 65px;
+    top: 970px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #D46868;
+}
+
+
+/* Time: */
+
+.time {
+    position: absolute;
+    width: 123px;
+    height: 33px;
+    left: 380px;
+    top: 975px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #D46868;
+}
+
+
+/* Hủy */
+
+.cancle {
+    position: absolute;
+    width: 39px;
+    height: 16px;
+    left: 1260px;
+    top: 984px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+}
+
+
+/* Lưu */
+
+.save {
+    position: absolute;
+    width: 31px;
+    height: 19px;
+    left: 1352px;
+    top: 983px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+}
+
+
+/* Rectangle 18 icon cây bút */
+
+.rec18 {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    left: 130px;
+    top: 12px;
+
+    background: url(pencil.png);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+/* Line 1 */
+
+.line1 {
+    position: absolute;
+    width: 21px;
+    height: 0px;
+    left: 37px;
+    top: 13px;
+
+    border: 1px solid #000000;
+    transform: rotate(90deg);
+}
+
+
+/* Rectangle 21 */
+
+.rec21 {
+    position: absolute;
+    width: 121px;
+    height: 37px;
+    left: 1252px;
+    top: 685px;
+
+    background: #FFFFFF;
+    border-radius: 18.5px;
+}
+
+/* Rectangle 22 */
+
+
+.rec22 {
+    position: absolute;
+    width: 121px;
+    height: 37px;
+    left: 1252px;
+    top: 748px;
+
+    background: #FFFFFF;
+    border-radius: 18.5px;
+}
+
+/* + Thêm đáp án */
+
+.addAnswer {
+    position: absolute;
+    width: 114px;
+    height: 25px;
+    left: 1270px;
+    top: 691px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+
+    color: #AA14A4;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* + Thêm câu hỏi */
+
+.addQuestion {
+    position: absolute;
+    width: 107px;
+    height: 25px;
+    left: 1270px;
+    top: 754px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+
+    color: #AA14A4;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+/* The question 1 */
+
+.numQuestion {
+    position: absolute;
+    width: 137px;
+    height: 19px;
+    left: 63px;
+    top: 75px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+
+    color: #FFFFFF;
+}
+
+
+
+/* Checkbox */
+
+
+/* Auto layout */
+.checkBoxMoreCorrect {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 27.6px;
+    height: 27.6px;
+    left: 31px;
+    top: 978px;
+}
+
+
+/* Checkbox */
+
+
+/* Auto layout */
+
+.checkBoxAnswerBlue {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 37.5px;
+    height: 37.5px;
+    left: 291px;
+    top: 612px;
+}
+
+
+/* Checkbox */
+
+
+/* Auto layout */
+.checkBoxAnswerGreen {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 37.5px;
+    height: 37.5px;
+    left: 583px;
+    top: 612px;
+}
+
+
+/* Checkbox */
+
+
+/* Auto layout */
+.checkBoxAnswerYellow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 37.5px;
+    height: 37.5px;
+    left: 874px;
+    top: 612px;
+}
+
+
+
+/* Checkbox */
+
+
+/* Auto layout */
+.checkBoxAnswerRed {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 37.5px;
+    height: 37.5px;
+    left: 1166px;
+    top: 612px;
+}
+
+
+/* Rectangle 23 */
+
+.rec23 {
+    position: absolute;
+    width: 83px;
+    height: 31px;
+    left: 424px;
+    top: 977px;
+
+    background: #FFFFFF;
+    border-radius: 15.5px;
+}
+
+/* 30 seconds */
+
+.demoTime {
+    position: absolute;
+    width: 96px;
+    height: 13px;
+    left: 430px;
+    top: 986px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 13px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+}
