@@ -1,8 +1,8 @@
 # Author:
 
-20120240 - Duong Thi An 
+- 20120240 - Duong Thi An 
 
-20120305 - Vo Thi Kieu Khanh
+- 20120305 - Vo Thi Kieu Khanh
 
 # Clone repo
     
